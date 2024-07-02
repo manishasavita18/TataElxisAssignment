@@ -1,0 +1,44 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="VulnerableLibrariesLocal" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="isIgnoringEnabled" value="true" />
+      <option name="ignoredModules">
+        <list>
+          <option value="Web_API_Framework" />
+          <option value="Web_API_Framework" />
+          <option value="Web_API_Framework" />
+          <option value="Web_API_Framework" />
+          <option value="Web_API_Framework" />
+          <option value="Web_API_Framework" />
+          <option value="Web_API_Framework" />
+          <option value="Web_API_Framework" />
+        </list>
+      </option>
+      <option name="ignoredPackages">
+        <list>
+          <option value="commons-codec:commons-codec:1.11" />
+          <option value="org.testng:testng:7.4.0" />
+          <option value="com.fasterxml.jackson.core:jackson-databind:2.12.1" />
+          <option value="com.google.guava:guava:30.1.1-jre" />
+          <option value="com.googlecode.owasp-java-html-sanitizer:owasp-java-html-sanitizer:20200713.1" />
+          <option value="commons-collections:commons-collections:3.2.2" />
+          <option value="org.jsoup:jsoup:1.14.2" />
+          <option value="io.netty:netty-codec-http:4.1.69.Final" />
+        </list>
+      </option>
+      <option name="ignoredReasons">
+        <list>
+          <option value="Not exploitable" />
+          <option value="Not exploitable" />
+          <option value="Not exploitable" />
+          <option value="Not exploitable" />
+          <option value="Not exploitable" />
+          <option value="Not exploitable" />
+          <option value="Not exploitable" />
+          <option value="Not exploitable" />
+        </list>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>
