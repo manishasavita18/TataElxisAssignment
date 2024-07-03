@@ -34,30 +34,65 @@ public class SubscriptionPage {
             } else if (Objects.equals(country, "Kuwait"))
                 driver.findElement(By.id("kw")).click();
         }
-        public void ValidateResults(DataTable dataTable)
-        {
-            List<Map<String, String>> rows = dataTable.asMaps(String.class, String.class);
-            for (Map<String, String> columns : rows) {
-                String packageType = columns.get("PackageType");
-                String expectedPrice = columns.get("Price");
-                String expectedCurrency = columns.get("Currency");
-                // Locators
-                WebElement packageElement = driver.findElement(By.xpath("//div[@class='plan-names']"));
-                String resultContent = packageElement.getText();
-                System.out.print(resultContent);
-                String actualPriceAndCurrency = packageElement.findElement(By.xpath("//div[@class='price']")).getText();
-                System.out.print(actualPriceAndCurrency);
-                //String actualCurrency = packageElement.findElement(By.xpath("//div[@class='plan-names']")).getText();
-                //System.out.print(resultContent);
 
-                // Validate price and currency
-                assertTrue("Result does not contain expected string for " + packageType, resultContent.contains(packageType));
-                assertTrue("Result does not contain expected string for " + packageType, resultContent.contains(expectedCurrency));
-                assertTrue("Result does not contain expected string for " + packageType, resultContent.contains(expectedPrice));
+    public void ValidateResultsLITE(DataTable dataTable)
+    {
+        List<Map<String, String>> expectedDetailsList = dataTable.asMaps(String.class, String.class);
+        Map<String, String> expectedDetails = expectedDetailsList.getFirst();
 
-                //assertEquals("Currency does not match for " + packageType, expectedCurrency, actualCurrency);
-            }
-            // Close the browser after validation
-            driver.quit();
-        }
+        // Locate the subscription package element for "lite"
+        WebElement litePackage = driver.findElement(By.xpath("//div[contains(@class, 'plan-names')]"));
+
+        // Extract the type, price, and currency from the web page
+        String type = litePackage.findElement(By.id("name-lite")).getText();
+        String price = litePackage.findElement(By.xpath("//div[@class='price']/*[self::b]")).getText();
+        String currency = litePackage.findElement(By.xpath("//div[@class='price']/*[self::i]")).getText();
+        String currencyCode = currency.split("/")[0];
+
+        // Validate the extracted details against the expected details
+        assertEquals(expectedDetails.get("Packagetype"), type);
+        assertEquals(expectedDetails.get("Price"), price);
+        assertEquals(expectedDetails.get("Currency"), currencyCode);
     }
+    public void ValidateResultsCLASSIC(DataTable dataTable)
+    {
+        List<Map<String, String>> expectedDetailsList = dataTable.asMaps(String.class, String.class);
+        Map<String, String> expectedDetails = expectedDetailsList.getFirst();
+
+        // Locate the subscription package element for "lite"
+        WebElement litePackage = driver.findElement(By.xpath("//div[contains(@class, 'plan-names')]"));
+
+        // Extract the type, price, and currency from the web page
+        String type = litePackage.findElement(By.id("name-classic")).getText();
+        String price = litePackage.findElement(By.xpath("//div[@id='currency-classic']/*[self::b]")).getText();
+        String currency = litePackage.findElement(By.xpath("//div[@class='price']/*[self::i]")).getText();
+        String currencyCode = currency.split("/")[0];
+
+        // Validate the extracted details against the expected details
+        assertEquals(expectedDetails.get("Packagetype"), type);
+        assertEquals(expectedDetails.get("Price"), price);
+        assertEquals(expectedDetails.get("Currency"), currencyCode);
+    }
+    public void ValidateResultsPREMIUM(DataTable dataTable)
+    {
+        List<Map<String, String>> expectedDetailsList = dataTable.asMaps(String.class, String.class);
+        Map<String, String> expectedDetails = expectedDetailsList.getFirst();
+
+        // Locate the subscription package element for "lite"
+        WebElement premiumPackage = driver.findElement(By.xpath("//div[contains(@class, 'plan-names')]"));
+
+        // Extract the type, price, and currency from the web page
+        String type = premiumPackage.findElement(By.id("name-premium")).getText();
+        String price = premiumPackage.findElement(By.xpath("//div[@id='currency-premium']/*[self::b]")).getText();
+        String currency = premiumPackage.findElement(By.xpath("//div[@class='price']/*[self::i]")).getText();
+        String currencyCode = currency.split("/")[0];
+
+        // Validate the extracted details against the expected details
+        assertEquals(expectedDetails.get("Packagetype"), type);
+        assertEquals(expectedDetails.get("Price"), price);
+        assertEquals(expectedDetails.get("Currency"), currencyCode);
+
+        // Close the browser
+        driver.quit();
+    }
+}

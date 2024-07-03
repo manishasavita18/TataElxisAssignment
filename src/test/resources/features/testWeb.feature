@@ -3,13 +3,17 @@ Feature: Subscription Validation
   Scenario Outline: Validate subscription packages for <Country>
     Given I navigate to "https://subscribe.stctv.com/sa-en"
     When I select country "<Country>"
-    Then I validate subscription packages with the following details
-      | PackageType | Price | Currency |
-      | <PackageType1> | <Price1> | <Currency1> |
-      | <PackageType2> | <Price2> | <Currency2> |
-      | <PackageType3> | <Price3> | <Currency3> |
+    Then the subscription package details for LITE should be:
+      | Packagetype         | Price                | Currency             |
+      | <Packagetype_Lite>  | <Price_Lite>         | <Currency_Lite>      |
+    And the subscription package details for CLASSIC should be:
+      | Packagetype           | Price                 | Currency          |
+      | <Packagetype_Classic> | <Price_Classic>       | <Currency_Classic>|
+    And the subscription package details for PREMIUM should be:
+      | Packagetype           | Price                 | Currency          |
+      | <Packagetype_Premium> | <Price_Premium>       | <Currency_Premium>|
     Examples:
-      | Country | PackageType1 | Price1 | Currency1 | PackageType2 | Price2 | Currency2 |PackageType3 | Price3 | Currency3 |
-      | KSA     | LITE         | 15     | SAR       | CLASSIC      | 25     | SAR       |Premium      |  60    | SAR       |
-      | Kuwait  | Lite         | 1.2    | KWD       | Classic      | 2.5    | KWD       |Premium      | 4.8    | KWD       |
-      | Bahrain | Lite         | 2      | BHD       | Classic      | 3      | BHD       |Premium      |   6    | BHD       |
+      | Country | Packagetype_Lite | Price_Lite | Currency_Lite | Packagetype_Classic | Price_Classic | Currency_Classic |Packagetype_Premium | Price_Premium | Currency_Premium |
+      | KSA     | LITE             | 15         | SAR           | CLASSIC             | 25            | SAR              |PREMIUM             |  60    | SAR       |
+      | Kuwait  | LITE             | 1.2        | KWD           | CLASSIC             | 2.5           | KWD              |PREMIUM             | 4.8    | KWD       |
+      | Bahrain | LITE             | 2          | BHD           | CLASSIC             | 3             | BHD              |PREMIUM             |   6    | BHD       |
